@@ -1,5 +1,6 @@
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.Semaphore;
 
 public class MainClass {
 
@@ -10,6 +11,8 @@ public class MainClass {
                 new Runnable() { public void run() {System.out.println("ВАЖНОЕ ОБЪЯВЛЕНИЕ >>> Гонка началась!!!"); }};
         CyclicBarrier barrier = new CyclicBarrier(CARS_COUNT, barrierAction); // объект синхронизации, устанавливает блокировку
         // для CARS_COUNT потоков до некоторой позиции в коде, вынуждая ждать друг друга
+
+        //Semaphore smp = new Semaphore(2);
 
         System.out.println("ВАЖНОЕ ОБЪЯВЛЕНИЕ >>> Подготовка!!!");
         Race race = new Race(new Road(60), new Tunnel(), new Road(40));
