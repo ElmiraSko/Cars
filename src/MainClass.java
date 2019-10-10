@@ -12,10 +12,10 @@ public class MainClass {
         CyclicBarrier barrier = new CyclicBarrier(CARS_COUNT, barrierAction); // объект синхронизации, устанавливает блокировку
         // для CARS_COUNT потоков до некоторой позиции в коде, вынуждая ждать друг друга
 
-        //Semaphore smp = new Semaphore(2);
+        Semaphore smp = new Semaphore(2, true); // ссылка на Semaphore передается в конструктор тоннеля
 
         System.out.println("ВАЖНОЕ ОБЪЯВЛЕНИЕ >>> Подготовка!!!");
-        Race race = new Race(new Road(60), new Tunnel(), new Road(40));
+        Race race = new Race(new Road(60), new Tunnel(smp), new Road(40));
         Car[] cars = new Car[CARS_COUNT];
         for (int i = 0; i < cars.length; i++) {
             cars[i] = new Car(race, 20 + (int) (Math.random() * 10), cdl, barrier); // еще в конструктор передаем cdl, barrier
